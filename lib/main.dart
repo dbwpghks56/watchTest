@@ -1,36 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:watchtest/screens/ambientwatchface.dart';
+import 'package:watchtest/screens/main_timer_screen.dart';
 import 'package:wear/wear.dart';
+import 'package:get/get.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: WatchShape(
-            builder: (BuildContext context, WearShape shape, Widget? child) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'Shape: ${shape == WearShape.round ? 'round' : 'square'}',
-                  ),
-                  child!,
-                ],
-              );
-            },
-            child: AmbientMode(
-              builder: (BuildContext context, WearMode mode, Widget? child) {
-                return Text(
-                  'Mode: ${mode == WearMode.active ? 'Active' : 'Ambient'}',
-                );
-              },
+  Widget build(BuildContext context) => GetMaterialApp(
+    title: 'Flutter Wear App',
+    theme: ThemeData(
+      primarySwatch: Colors.blue,
+    ),
+    home: WatchScreen(),
+    debugShowCheckedModeBanner: false,
+  );
+}
+
+class WatchScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) =>
+      WatchShape(
+        builder: (context, shape, child) =>
+            InheritedShape(
+              shape: shape,
+              child: AmbientMode(
+                builder: (context, mode, child) =>
+                mode == WearMode.active ? MainTimerScreen() : const Ambientwatchface(),
+              ),
             ),
-          ),
-        ),
-      ),
-    );
-  }
+      );
 }
