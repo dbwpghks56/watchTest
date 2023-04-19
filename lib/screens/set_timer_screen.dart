@@ -19,6 +19,7 @@ class SetTimerScreen extends StatelessWidget {
                   onPressed: (){
                     timerModel.totalTimer = timerModel.timerMin * 60 + timerModel.timerSec;
                     timerModel.currentTimer = timerModel.totalTimer;
+                    print(timerModel.currentTimer);
                     Get.back();
                   },
                   child: const Row(

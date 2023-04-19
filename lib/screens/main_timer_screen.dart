@@ -8,6 +8,7 @@ import 'package:watchtest/screens/set_timer_screen.dart';
 import 'package:wear/wear.dart';
 
 import '../enum/TimerStatus.dart';
+import '../ui/sized_button.dart';
 import '../widgets/pie_timer_widget.dart';
 
 class MainTimerScreen extends StatelessWidget {
@@ -46,7 +47,7 @@ class MainTimerScreen extends StatelessWidget {
           t.cancel();
           break;
         case TimerStatus.running:
-          print(timerModel.currentTimer);
+
           if(timerModel.timerSec <= 0 && timerModel.timerMin <= 0) {
             timerModel.timerStatus = TimerStatus.stopped;
             timerModel.timerMin = timerModel.saveMin;
@@ -66,6 +67,7 @@ class MainTimerScreen extends StatelessWidget {
           timerModel.timerMin = timerModel.saveMin;
           timerModel.timerSec = timerModel.saveSec;
           timerModel.currentTimer = timerModel.totalTimer;
+          t.cancel();
           break;
         default: break;
       }
@@ -92,28 +94,36 @@ class MainTimerScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _SizedButton(
+                    SizedButton(
+                        boxWidth: 50,
+                        boxHeight: 27,
                         content: "정지",
                         onButtonPressed: () {
                           stop();
                         }
                     ),
-                    _SizedButton(
+                    SizedButton(
+                        boxWidth: 50,
+                        boxHeight: 27,
                         content: "시작",
                         onButtonPressed: () {
                           run();
                         }
                     ),
-                    _SizedButton(
+                    SizedButton(
+                        boxWidth: 50,
+                        boxHeight: 27,
                         content: "리셋",
                         onButtonPressed: () {
-                          Get.to(() => PieTimerWidget());
+                          reset();
                         }
                     ),
                   ],
                 ),
                 const Padding(padding: EdgeInsets.all(5)),
-                _SizedButton(
+                SizedButton(
+                    boxWidth: 50,
+                    boxHeight: 27,
                     content: "설정",
                     onButtonPressed: () {
                       Get.to(() => SetTimerScreen());
@@ -134,26 +144,4 @@ class MainTimerScreen extends StatelessWidget {
   }
 }
 
-class _SizedButton extends StatelessWidget {
-  final String content;
-  final GestureTapCallback onButtonPressed;
 
-  const _SizedButton({
-    required this.content,
-    required this.onButtonPressed
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 27,
-      width: 50,
-      child: ElevatedButton(
-        onPressed: onButtonPressed,
-        child: Text(content,
-          style: const TextStyle(fontSize: 8),
-        ),
-      ),
-    );
-  }
-}
