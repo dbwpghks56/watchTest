@@ -3,15 +3,17 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:watchtest/enum/TimerType.dart';
 import 'package:watchtest/model/TimerModel.dart';
 
 class PieChart extends CustomPainter {
-  PieChart({ required this.timermin, required this.timersec, required this.totaltimer, required this.currenttimer, required this.paintingStyle});
+  PieChart({ required this.timermin, required this.timersec, required this.totaltimer, required this.currenttimer, required this.paintingStyle, required this.timerType});
   int timermin;
   int timersec;
   int totaltimer;
   int currenttimer;
   PaintingStyle paintingStyle;
+  TimerType timerType;
 
   double textScaleFactor = 1.0;
 
@@ -44,6 +46,9 @@ class PieChart extends CustomPainter {
       Paint paint2 = Paint()
         ..color = Colors.white38;
       canvas.drawPath(p, paint2);
+    }
+
+    if(timerType == TimerType.lock) {
       drawText(canvas, size, "${timermin} : ${timersec}"); // 텍스트를 화면에 표시함.
     }
   }
@@ -52,7 +57,7 @@ class PieChart extends CustomPainter {
   void drawText(Canvas canvas, Size size, String text) {
     double fontSize = getFontSize(size, text);
 
-    TextSpan sp = TextSpan(style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold, color: Colors.black), text: text); // TextSpan은 Text위젯과 거의 동일하다.
+    TextSpan sp = TextSpan(style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold, color: Colors.white), text: text); // TextSpan은 Text위젯과 거의 동일하다.
     TextPainter tp = TextPainter(text: sp, textDirection: TextDirection.ltr);
 
     tp.layout(); // 필수! 텍스트 페인터에 그려질 텍스트의 크기와 방향를 정함.

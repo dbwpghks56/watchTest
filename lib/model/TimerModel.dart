@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:watchtest/enum/TimerStatus.dart';
+import 'package:watchtest/enum/TimerType.dart';
 
 class RxTimerModel {
   final timerMin = 0.obs;
@@ -8,6 +9,7 @@ class RxTimerModel {
   final saveMin = 0.obs;
   final totalTimer = 0.obs;
   final currentTimer = 0.obs;
+  final timerType = TimerType.none.obs;
   final timerStatus = TimerStatus.stopped.obs;
 }
 
@@ -18,6 +20,9 @@ class TimerModel {
 
   get timerMin => rx.timerMin.value;
   set timerMin(value) => rx.timerMin.value = value;
+
+  get timerType => rx.timerType.value;
+  set timerType(value) => rx.timerType.value = value;
 
   get totalTimer => rx.totalTimer.value;
   set totalTimer(value) => rx.totalTimer.value = value;

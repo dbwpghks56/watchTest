@@ -117,7 +117,7 @@ class MainTimerScreen extends StatelessWidget {
                         boxHeight: 27,
                         content: "리셋",
                         onButtonPressed: () {
-                          Get.to(MainWatchFace());
+                          Get.to(() => MainWatchFace());
                         }
                     ),
                   ],
@@ -128,7 +128,7 @@ class MainTimerScreen extends StatelessWidget {
                     boxHeight: 27,
                     content: "설정",
                     onButtonPressed: () {
-                      Get.to(SetTimerScreen());
+                      Get.to(() => SetTimerScreen());
                     }
                 ),
                 child!,

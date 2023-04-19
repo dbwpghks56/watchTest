@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:watchtest/enum/TimerType.dart';
 import 'package:watchtest/screens/ambientwatchface.dart';
 import 'package:watchtest/screens/main_timer_screen.dart';
 import 'package:watchtest/screens/main_watch_face.dart';
@@ -32,6 +33,7 @@ class WatchScreen extends StatelessWidget {
                 mode == WearMode.active ? MainWatchFace() : PieTimerWidget(mediaHeight: MediaQuery.of(context).size.height,
                   mediaWidth: MediaQuery.of(context).size.width,
                   paintingStyle: PaintingStyle.fill,
+                  timerType: TimerType.lock,
                 ),
               ),
             ),

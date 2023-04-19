@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sprintf/sprintf.dart';
-import 'package:watchtest/enum/ChildType.dart';
+import 'package:watchtest/model/PaintingChange.dart';
 import 'package:watchtest/model/TimerModel.dart';
 import 'package:watchtest/screens/set_timer_screen.dart';
 import 'package:watchtest/ui/sized_button.dart';
@@ -12,6 +12,7 @@ import '../enum/TimerStatus.dart';
 
 class StackCenterButton extends StatelessWidget {
   final timerModel = Get.put(TimerModel());
+  final paintingChange = Get.put(PaintingChange());
   StackCenterButton({Key? key}) : super(key: key);
 
   String timerToString(int min, int sec) {
@@ -66,7 +67,7 @@ class StackCenterButton extends StatelessWidget {
           timerModel.timerMin = timerModel.saveMin;
           timerModel.timerSec = timerModel.saveSec;
           timerModel.currentTimer = timerModel.totalTimer;
-          t.cancel();
+          timerModel.timerStatus = TimerStatus.stopped;
           break;
         default: break;
       }
@@ -83,8 +84,9 @@ class StackCenterButton extends StatelessWidget {
             Obx(() {
               return Text(
                 timerToString(timerModel.timerMin, timerModel.timerSec),
-                style: const TextStyle(
-                    fontSize: 40
+                style: TextStyle(
+                  fontSize: 40,
+                  color: paintingChange.paintingStyle == PaintingStyle.stroke ? Colors.black : Colors.white,
                 ),
               );
             }),
@@ -102,7 +104,7 @@ class StackCenterButton extends StatelessWidget {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(2),
                       onTap: () {
-                        Get.to(SetTimerScreen());
+                        Get.to(() => SetTimerScreen());
                       },
                       child: const Icon(
                         Icons.settings,

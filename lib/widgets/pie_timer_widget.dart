@@ -1,15 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:watchtest/enum/TimerType.dart';
 import 'package:watchtest/model/TimerModel.dart';
 import '../ui/pie_chart.dart';
 
 class PieTimerWidget extends StatelessWidget {
-  PieTimerWidget({required this.mediaWidth, required this.mediaHeight, required this.paintingStyle});
+  PieTimerWidget({required this.mediaWidth, required this.mediaHeight, required this.paintingStyle, required this.timerType});
   final timerModel = Get.put(TimerModel());
   final double mediaWidth;
   final double mediaHeight;
   final PaintingStyle paintingStyle;
+  final TimerType timerType;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,8 @@ class PieTimerWidget extends StatelessWidget {
                     timersec: timerModel.timerSec,
                     totaltimer: timerModel.totalTimer,
                     currenttimer: timerModel.currentTimer,
-                    paintingStyle: paintingStyle
+                    paintingStyle: paintingStyle,
+                    timerType: timerType,
                   ),
                   ));
               }),

@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:watchtest/model/PaintingChange.dart';
 import 'package:watchtest/model/TimerModel.dart';
 
 class SetTimerScreen extends StatelessWidget {
   final timerModel = Get.put(TimerModel());
+  final paintingChange = Get.put(PaintingChange());
   SetTimerScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: ListView(
             children: [
               TextButton(
                   onPressed: (){
                     timerModel.totalTimer = timerModel.timerMin * 60 + timerModel.timerSec;
                     timerModel.currentTimer = timerModel.totalTimer;
-                    print(timerModel.currentTimer);
+
                     Get.back();
                   },
                   child: const Row(
@@ -77,6 +77,30 @@ class SetTimerScreen extends StatelessWidget {
                   ),
                 ],
               ),
+                Obx(() {
+                  return ListTile(
+                    title: const Text('원형'),
+                    leading: Radio<PaintingStyle>(
+                      value: PaintingStyle.fill,
+                      groupValue: paintingChange.paintingStyle,
+                      onChanged: (PaintingStyle? value) {
+                        paintingChange.paintingStyle = value;
+                      },
+                    ),
+                  );
+                }),
+                Obx(() {
+                  return ListTile(
+                    title: const Text('선형'),
+                    leading: Radio<PaintingStyle>(
+                      value: PaintingStyle.stroke,
+                      groupValue: paintingChange.paintingStyle,
+                      onChanged: (PaintingStyle? value) {
+                        paintingChange.paintingStyle = value;
+                      },
+                    ),
+                  );
+                }),
             ],
           )
       ),
