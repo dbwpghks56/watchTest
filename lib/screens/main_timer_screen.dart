@@ -8,6 +8,7 @@ import 'package:watchtest/screens/set_timer_screen.dart';
 import 'package:wear/wear.dart';
 
 import '../enum/TimerStatus.dart';
+import '../widgets/pie_timer_widget.dart';
 
 class MainTimerScreen extends StatelessWidget {
   final timerModel = Get.put(TimerModel());
@@ -22,7 +23,7 @@ class MainTimerScreen extends StatelessWidget {
   }
 
   void reset() {
-    timerModel.timerStatus = TimerStatus.stopped;
+    timerModel.timerStatus = TimerStatus.resting;
   }
 
   void pause() {
@@ -42,16 +43,19 @@ class MainTimerScreen extends StatelessWidget {
       switch(timerModel.timerStatus) {
         case TimerStatus.paused: t.cancel(); break;
         case TimerStatus.stopped:
-          timerModel.timerMin = timerModel.saveMin;
-          timerModel.timerSec = timerModel.saveSec;
           t.cancel();
           break;
         case TimerStatus.running:
+          print(timerModel.currentTimer);
           if(timerModel.timerSec <= 0 && timerModel.timerMin <= 0) {
             timerModel.timerStatus = TimerStatus.stopped;
+            timerModel.timerMin = timerModel.saveMin;
+            timerModel.timerSec = timerModel.saveSec;
+            timerModel.currentTimer = timerModel.totalTimer;
             t.cancel();
           } else {
             timerModel.timerSec -= 1;
+            timerModel.currentTimer -= 1;
             if(timerModel.timerSec <= 0 && timerModel.timerMin > 0) {
               timerModel.timerMin -= 1;
               timerModel.timerSec = 59;
@@ -59,6 +63,9 @@ class MainTimerScreen extends StatelessWidget {
           }
           break;
         case TimerStatus.resting:
+          timerModel.timerMin = timerModel.saveMin;
+          timerModel.timerSec = timerModel.saveSec;
+          timerModel.currentTimer = timerModel.totalTimer;
           break;
         default: break;
       }
@@ -100,7 +107,7 @@ class MainTimerScreen extends StatelessWidget {
                     _SizedButton(
                         content: "리셋",
                         onButtonPressed: () {
-                          reset();
+                          Get.to(() => PieTimerWidget());
                         }
                     ),
                   ],

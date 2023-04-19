@@ -6,6 +6,8 @@ class RxTimerModel {
   final timerSec = 0.obs;
   final saveSec = 0.obs;
   final saveMin = 0.obs;
+  final totalTimer = 0.obs;
+  final currentTimer = 0.obs;
   final timerStatus = TimerStatus.stopped.obs;
 }
 
@@ -16,6 +18,12 @@ class TimerModel {
 
   get timerMin => rx.timerMin.value;
   set timerMin(value) => rx.timerMin.value = value;
+
+  get totalTimer => rx.totalTimer.value;
+  set totalTimer(value) => rx.totalTimer.value = value;
+
+  get currentTimer => rx.currentTimer.value;
+  set currentTimer(value) => rx.currentTimer.value = value;
 
   get timerSec => rx.timerSec.value;
   set timerSec(value) => rx.timerSec.value = value;

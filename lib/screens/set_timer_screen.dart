@@ -17,10 +17,12 @@ class SetTimerScreen extends StatelessWidget {
             children: [
               TextButton(
                   onPressed: (){
-                    Navigator.of(context).pop();
+                    timerModel.totalTimer = timerModel.timerMin * 60 + timerModel.timerSec;
+                    timerModel.currentTimer = timerModel.totalTimer;
+                    Get.back();
                   },
-                  child: Row(
-                    children: const [
+                  child: const Row(
+                    children: [
                       Icon(
                           Icons.arrow_back
                       ),
