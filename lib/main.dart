@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:watchtest/enum/TimerType.dart';
 import 'package:watchtest/screens/ambientwatchface.dart';
-import 'package:watchtest/screens/main_timer_screen.dart';
 import 'package:watchtest/screens/main_watch_face.dart';
 import 'package:watchtest/widgets/pie_timer_widget.dart';
 import 'package:wear/wear.dart';

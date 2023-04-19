@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watchtest/model/PaintingChange.dart';
 import 'package:watchtest/model/TimerModel.dart';
 
@@ -9,8 +10,14 @@ class SetTimerScreen extends StatelessWidget {
   final paintingChange = Get.put(PaintingChange());
   SetTimerScreen({Key? key}) : super(key: key);
 
+  Future<void> setPaintingType(String paintingStyle) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("paintStyle", paintingStyle);
+  }
+
   @override
   Widget build(BuildContext context) {
+    var colorList = [Colors.blue, Colors.redAccent, Colors.green, Colors.grey, Colors.black, Colors.blueGrey];
     return Scaffold(
       body: Center(
           child: ListView(
@@ -19,13 +26,12 @@ class SetTimerScreen extends StatelessWidget {
                   onPressed: (){
                     timerModel.totalTimer = timerModel.timerMin * 60 + timerModel.timerSec;
                     timerModel.currentTimer = timerModel.totalTimer;
-
                     Get.back();
                   },
-                  child: const Row(
-                    children: [
+                  child: Row(
+                    children: const [
                       Icon(
-                          Icons.arrow_back
+                          Icons.arrow_back,
                       ),
                       Text("Back")
                     ],
@@ -84,6 +90,7 @@ class SetTimerScreen extends StatelessWidget {
                       value: PaintingStyle.fill,
                       groupValue: paintingChange.paintingStyle,
                       onChanged: (PaintingStyle? value) {
+                        setPaintingType("fill");
                         paintingChange.paintingStyle = value;
                       },
                     ),
@@ -96,11 +103,67 @@ class SetTimerScreen extends StatelessWidget {
                       value: PaintingStyle.stroke,
                       groupValue: paintingChange.paintingStyle,
                       onChanged: (PaintingStyle? value) {
+                        setPaintingType("stroke");
                         paintingChange.paintingStyle = value;
                       },
                     ),
                   );
                 }),
+                ElevatedButton(
+                    onPressed: (){
+                      Get.dialog(
+                        Dialog(
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
+                            child: GridView.count(
+                              // Create a grid with 2 columns. If you change the scrollDirection to
+                              // horizontal, this produces 2 rows.
+                              crossAxisCount: 2,
+                              // Generate 100 widgets that display their index in the List.
+                              children: List.generate(6, (index) {
+                                return Center(
+                                  child: Text(
+                                    'Item $index',
+                                    style: Theme.of(context).textTheme.headlineSmall,
+                                  ),
+                                );
+                              }),
+                            ),
+                          ),
+                        )
+                      );
+                    },
+                    child: Text("배경 색")
+                ),
+              ElevatedButton(
+                  onPressed: (){
+                    Get.dialog(
+                        Dialog(
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
+                            child: GridView.count(
+                              // Create a grid with 2 columns. If you change the scrollDirection to
+                              // horizontal, this produces 2 rows.
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 5,
+                              crossAxisSpacing: 5,
+                              // Generate 100 widgets that display their index in the List.
+                              children: List.generate(colorList.length, (index) {
+                                return Center(
+                                  child: Container(
+                                    color: colorList[index],
+                                  )
+                                );
+                              }),
+                            ),
+                          ),
+                        )
+                    );
+                  },
+                  child: Text("띠 혹은 원 색")
+              ),
             ],
           )
       ),
