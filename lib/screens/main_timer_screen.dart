@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watchtest/model/TimerModel.dart';
 import 'package:sprintf/sprintf.dart';
+import 'package:watchtest/screens/main_watch_face.dart';
 import 'package:watchtest/screens/set_timer_screen.dart';
+import 'package:watchtest/widgets/stack_center_button.dart';
 import 'package:wear/wear.dart';
 
 import '../enum/TimerStatus.dart';
@@ -115,7 +117,7 @@ class MainTimerScreen extends StatelessWidget {
                         boxHeight: 27,
                         content: "리셋",
                         onButtonPressed: () {
-                          reset();
+                          Get.to(MainWatchFace());
                         }
                     ),
                   ],
@@ -126,7 +128,7 @@ class MainTimerScreen extends StatelessWidget {
                     boxHeight: 27,
                     content: "설정",
                     onButtonPressed: () {
-                      Get.to(() => SetTimerScreen());
+                      Get.to(SetTimerScreen());
                     }
                 ),
                 child!,

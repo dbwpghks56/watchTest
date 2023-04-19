@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:watchtest/enum/ChildType.dart';
 
 class SizedButton extends StatelessWidget {
-  final String content;
+  final String? content;
   final GestureTapCallback onButtonPressed;
   final double boxWidth;
   final double boxHeight;
+  final ChildType? childType;
+  final Icon? icon;
 
   const SizedButton({super.key,
-    required this.content,
+    this.childType,
+    this.icon,
+    this.content,
     required this.onButtonPressed,
     required this.boxHeight,
     required this.boxWidth
@@ -20,9 +25,9 @@ class SizedButton extends StatelessWidget {
       width: boxWidth,
       child: ElevatedButton(
         onPressed: onButtonPressed,
-        child: Text(content,
+        child: childType == null ? Text(content!,
           style: const TextStyle(fontSize: 8),
-        ),
+        ) : icon,
       ),
     );
   }

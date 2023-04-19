@@ -44,9 +44,8 @@ class PieChart extends CustomPainter {
       Paint paint2 = Paint()
         ..color = Colors.white38;
       canvas.drawPath(p, paint2);
+      drawText(canvas, size, "${timermin} : ${timersec}"); // 텍스트를 화면에 표시함.
     }
-
-    drawText(canvas, size, "${timermin} : ${timersec}"); // 텍스트를 화면에 표시함.
   }
 
   // 원의 중앙에 텍스트를 적음.
