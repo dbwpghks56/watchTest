@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:watchtest/model/PaintingChange.dart';
+import 'package:watchtest/model/TimerColor.dart';
 import 'package:watchtest/model/TimerModel.dart';
 import 'package:watchtest/screens/set_timer_screen.dart';
 import 'package:watchtest/ui/sized_button.dart';

@@ -1,23 +1,39 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watchtest/model/PaintingChange.dart';
+import 'package:watchtest/model/TimerColor.dart';
 import 'package:watchtest/model/TimerModel.dart';
 
 class SetTimerScreen extends StatelessWidget {
   final timerModel = Get.put(TimerModel());
   final paintingChange = Get.put(PaintingChange());
+  final timerColor = Get.put(TimerColor());
+  final List<bool> _timerType = <bool>[false, false];
   SetTimerScreen({Key? key}) : super(key: key);
 
+  Future<SharedPreferences> getPrefs() async {
+    return await SharedPreferences.getInstance();
+  }
+
   Future<void> setPaintingType(String paintingStyle) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("paintStyle", paintingStyle);
+    getPrefs().then((value) => value.setString("paintStyle", paintingStyle));
+  }
+
+  Future<void> setBackTimerColor(int colorCode) async {
+    getPrefs().then((value) => value.setInt("backTimerColor", colorCode));
+  }
+
+  Future<void> setFrontTimerColor(int colorCode) async {
+    getPrefs().then((value) => value.setInt("frontTimerColor", colorCode));
   }
 
   @override
   Widget build(BuildContext context) {
-    var colorList = [Colors.blue, Colors.redAccent, Colors.green, Colors.grey, Colors.black, Colors.blueGrey];
+    var colorList = [const Color(0xffB1B2FF), const Color(0xffAAC4FF), const Color(0xffD2DAFF), const Color(0xffEEF1FF),
+      const Color(0xffFFF2CC), const Color(0xffFFD966), const Color(0xffF4B183), const Color(0xffDFA67B)];
     return Scaffold(
       body: Center(
           child: ListView(
@@ -28,8 +44,8 @@ class SetTimerScreen extends StatelessWidget {
                     timerModel.currentTimer = timerModel.totalTimer;
                     Get.back();
                   },
-                  child: Row(
-                    children: const [
+                  child: const Row(
+                    children: [
                       Icon(
                           Icons.arrow_back,
                       ),
@@ -121,12 +137,21 @@ class SetTimerScreen extends StatelessWidget {
                               // horizontal, this produces 2 rows.
                               crossAxisCount: 2,
                               // Generate 100 widgets that display their index in the List.
-                              children: List.generate(6, (index) {
+                              children: List.generate(colorList.length, (index) {
                                 return Center(
-                                  child: Text(
-                                    'Item $index',
-                                    style: Theme.of(context).textTheme.headlineSmall,
-                                  ),
+                                    child: Container(
+                                      color: colorList[index],
+                                      child: Obx(() {
+                                        return InkWell(
+                                          onTap: () async {
+                                            await setBackTimerColor(colorList[index].value);
+                                            timerColor.backTimerColor = colorList[index].value;
+                                            Get.back();
+                                          },
+                                          focusColor: Color(timerColor.backTimerColor),
+                                        );
+                                      })
+                                    )
                                 );
                               }),
                             ),
@@ -134,7 +159,7 @@ class SetTimerScreen extends StatelessWidget {
                         )
                       );
                     },
-                    child: Text("배경 색")
+                    child: const Text("배경 색")
                 ),
               ElevatedButton(
                   onPressed: (){
@@ -144,16 +169,21 @@ class SetTimerScreen extends StatelessWidget {
                             height: MediaQuery.of(context).size.height,
                             width: MediaQuery.of(context).size.width,
                             child: GridView.count(
-                              // Create a grid with 2 columns. If you change the scrollDirection to
-                              // horizontal, this produces 2 rows.
                               crossAxisCount: 2,
-                              mainAxisSpacing: 5,
-                              crossAxisSpacing: 5,
-                              // Generate 100 widgets that display their index in the List.
                               children: List.generate(colorList.length, (index) {
                                 return Center(
                                   child: Container(
                                     color: colorList[index],
+                                    child: Obx(() {
+                                      return InkWell(
+                                        onTap: () async {
+                                          await setFrontTimerColor(colorList[index].value);
+                                          timerColor.frontTimerColor = colorList[index].value;
+                                          Get.back();
+                                        },
+                                        focusColor: Color(timerColor.frontTimerColor),
+                                      );
+                                    })
                                   )
                                 );
                               }),
@@ -162,7 +192,7 @@ class SetTimerScreen extends StatelessWidget {
                         )
                     );
                   },
-                  child: Text("띠 혹은 원 색")
+                  child: const Text("띠 혹은 원 색")
               ),
             ],
           )
