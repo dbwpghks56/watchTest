@@ -63,7 +63,18 @@ class PieChart extends CustomPainter {
   void drawText(Canvas canvas, Size size, String text) {
     double fontSize = getFontSize(size, text);
 
-    TextSpan sp = TextSpan(style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold, color: Colors.white), text: text); // TextSpan은 Text위젯과 거의 동일하다.
+    TextSpan sp = TextSpan(style: TextStyle(
+        fontSize: fontSize,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      shadows: const [
+        Shadow(
+          offset: Offset(1.0, 1.0),
+          blurRadius: 2.0,
+          color: Colors.black,
+        ),
+      ],
+    ), text: text); // TextSpan은 Text위젯과 거의 동일하다.
     TextPainter tp = TextPainter(text: sp, textDirection: TextDirection.ltr);
 
     tp.layout(); // 필수! 텍스트 페인터에 그려질 텍스트의 크기와 방향를 정함.

@@ -8,7 +8,7 @@ import 'package:watchtest/model/TimerModel.dart';
 import '../ui/pie_chart.dart';
 
 class PieTimerWidget extends StatelessWidget {
-  PieTimerWidget({required this.mediaWidth, required this.mediaHeight, required this.paintingStyle, required this.timerType, this.backColor, this.frontColor});
+  PieTimerWidget({super.key, required this.mediaWidth, required this.mediaHeight, required this.paintingStyle, required this.timerType, this.backColor, this.frontColor});
   final timerModel = Get.put(TimerModel());
   final timerColor = Get.put(TimerColor());
   final double mediaWidth;
