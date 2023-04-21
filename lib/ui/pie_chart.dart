@@ -2,9 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:watchtest/enum/TimerType.dart';
-import 'package:watchtest/model/TimerModel.dart';
 
 class PieChart extends CustomPainter {
   PieChart({ required this.timermin, required this.timersec, required this.totaltimer, required this.currenttimer, required this.paintingStyle, required this.timerType,

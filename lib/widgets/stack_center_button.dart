@@ -13,6 +13,7 @@ import '../enum/TimerStatus.dart';
 
 class StackCenterButton extends StatelessWidget {
   final timerModel = Get.put(TimerModel());
+  final timerColor = Get.put(TimerColor());
   final paintingChange = Get.put(PaintingChange());
   StackCenterButton({Key? key}) : super(key: key);
 
@@ -95,6 +96,16 @@ class StackCenterButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Obx(() {
+                  return Container(
+                    color: timerColor.backTimerColor % 1000 != timerColor.frontTimerColor % 1000 ? Color(timerColor.backTimerColor) : Color(timerColor.frontTimerColor),
+                  );
+                }),
+                Obx(() {
+                  return Container(
+                    color: timerColor.backTimerColor % 1000 == timerColor.frontTimerColor % 1000 ? Color(timerColor.backTimerColor) : Color(timerColor.frontTimerColor),
+                  );
+                }),
                 Container(
                     width: 30,
                     height: 20,

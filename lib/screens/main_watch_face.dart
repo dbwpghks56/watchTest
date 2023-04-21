@@ -38,21 +38,21 @@ class MainWatchFace extends StatelessWidget {
     setTimerColors();
     return Scaffold(
       body: Center(
-        child: Stack(
-          children: [
-            Obx(() {
-              return PieTimerWidget(
+        child: Obx(() {
+          return Stack(
+            children: [
+              PieTimerWidget(
                 mediaHeight: MediaQuery.of(context).size.height,
                 mediaWidth: MediaQuery.of(context).size.width,
                 paintingStyle: paintingChange.paintingStyle,
                 timerType: TimerType.none,
                 backColor: timerColor.backTimerColor,
                 frontColor: timerColor.frontTimerColor,
-              );
-            }),
-            StackCenterButton(),
-          ],
-        ),
+              ),
+              StackCenterButton(),
+            ],
+          );
+        }),
       ),
     );
   }
