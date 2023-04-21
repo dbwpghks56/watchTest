@@ -44,8 +44,8 @@ class SetTimerScreen extends StatelessWidget {
                     timerModel.currentTimer = timerModel.totalTimer;
                     Get.back();
                   },
-                  child: const Row(
-                    children: [
+                  child: Row(
+                    children: const [
                       Icon(
                           Icons.arrow_back,
                       ),
