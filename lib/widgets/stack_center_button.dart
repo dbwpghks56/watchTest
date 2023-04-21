@@ -98,12 +98,12 @@ class StackCenterButton extends StatelessWidget {
               children: [
                 Obx(() {
                   return Container(
-                    color: timerColor.backTimerColor % 1000 != timerColor.frontTimerColor % 1000 ? Color(timerColor.backTimerColor) : Color(timerColor.frontTimerColor),
+                    color: timerColor.backTimerColor != timerColor.frontTimerColor ? Color(timerColor.backTimerColor) : Color(timerColor.frontTimerColor),
                   );
                 }),
                 Obx(() {
                   return Container(
-                    color: timerColor.backTimerColor % 1000 == timerColor.frontTimerColor % 1000 ? Color(timerColor.backTimerColor) : Color(timerColor.frontTimerColor),
+                    color: timerColor.backTimerColor == timerColor.frontTimerColor ? Color(timerColor.backTimerColor) : Color(timerColor.frontTimerColor),
                   );
                 }),
                 Container(
