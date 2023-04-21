@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watchtest/enum/TimerType.dart';
 import 'package:watchtest/model/TimerColor.dart';
-import 'package:watchtest/screens/ambientwatchface.dart';
 import 'package:watchtest/screens/main_watch_face.dart';
 import 'package:watchtest/widgets/pie_timer_widget.dart';
 import 'package:wear/wear.dart';
