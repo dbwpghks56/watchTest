@@ -1,5 +1,7 @@
 # watchtest
 
+말 그대로 기능 구현의 테스트용 레포지토리 후에 배포하기 전 리팩토링 작업을 거친 후 배포 예정
+
 A new Flutter project.
 
 ## Getting Started
