@@ -32,7 +32,9 @@ class SetTimerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var colorList = [const Color(0xffB1B2FF), const Color(0xffAAC4FF), const Color(0xffD2DAFF), const Color(0xffEEF1FF),
+    var colorList = [const Color(0xff284FFF),const Color(0xffFFFFFF),const Color(0xff1A1A1A),const Color(0xffB1B2FF), const Color(0xffAAC4FF), const Color(0xffD2DAFF), const Color(0xffEEF1FF),
+      const Color(0xffFFF2CC), const Color(0xffFFD966), const Color(0xffF4B183), const Color(0xffDFA67B)];
+    var colorListFront = [const Color(0xffFF44A1),const Color(0xffFF2828),const Color(0xff28FFC6),const Color(0xffB1B2FF), const Color(0xffAAC4FF), const Color(0xffD2DAFF), const Color(0xffEEF1FF),
       const Color(0xffFFF2CC), const Color(0xffFFD966), const Color(0xffF4B183), const Color(0xffDFA67B)];
     return Scaffold(
       body: Center(
@@ -170,15 +172,15 @@ class SetTimerScreen extends StatelessWidget {
                             width: MediaQuery.of(context).size.width,
                             child: GridView.count(
                               crossAxisCount: 2,
-                              children: List.generate(colorList.length, (index) {
+                              children: List.generate(colorListFront.length, (index) {
                                 return Center(
                                   child: Container(
-                                    color: colorList[index],
+                                    color: colorListFront[index],
                                     child: Obx(() {
                                       return InkWell(
                                         onTap: () async {
-                                          await setFrontTimerColor(colorList[index].value);
-                                          timerColor.frontTimerColor = colorList[index].value;
+                                          await setFrontTimerColor(colorListFront[index].value);
+                                          timerColor.frontTimerColor = colorListFront[index].value;
                                           Get.back();
                                         },
                                         focusColor: Color(timerColor.frontTimerColor),
