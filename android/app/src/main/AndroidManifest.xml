@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.watch.wear.watchtest">
+    package="com.wackly.watch">
     <uses-feature
         android:name="android.hardware.type.watch"/>
    <application
-        android:label="watchtest"
+        android:label="WackyWatch"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
