@@ -3,7 +3,7 @@
     <uses-feature
         android:name="android.hardware.type.watch"/>
    <application
-        android:label="WackyWatch"
+        android:label="은하계 워치"
         android:name="${applicationName}"
         android:icon="@mipmap/g_watch_icon">
         <activity
