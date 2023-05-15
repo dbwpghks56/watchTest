@@ -4,6 +4,8 @@
 
 워치OS인 wearOS에서 실행되는 직관적인 타이머앱(얼렁뚱땅 우당탕탕) 
 
+https://play.google.com/store/apps/details?id=com.wackly.watch
+
 ## Getting Started
 
 
